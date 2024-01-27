@@ -1,47 +1,50 @@
 ﻿@model IEnumerable<TaskManager_Pro.Models.Task>
 
-@{
-    ViewData["Title"] = "Index";
-}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>TaskManager_Pro</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/Task.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/TaskManager_Pro.styles.css" asp-append-version="true" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@500&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="task-manager-container flex-container">
+            <section class="task-manager-heading-section task-manager-sections flex-container">
+                <h2>TaskManager Pro</h2>
+            </section>
+            <section class="task-manager-add-task-section task-manager-sections flex-container">
+                <div class="add-task-container flex-container">
+                    <input type="text" placeholder="Add new task..."/>
+                    <button>Add</button>
+                </div>
+            </section>
+            <section class="task-manager-task-list-section task-manager-sections flex-container">    
+                @foreach (var item in Model) {
+                    <div class="task-wrapper flex-container">
+                        <div class="checkmark-wrapper flex-container">
+                            <div class="checkmark"></div>
+                        </div>
+                        <div class="task-info-wrapper flex-container">
+		                    <div class="task-title">@item.Title</div>
+                        </div>
+                        <div class="task-remove-wrapper flex-container">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                        </div>
+                    </div>
+                }     
+            </section>
+        </div>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="https://kit.fontawesome.com/0844104394.js" crossorigin="anonymous"></script>
+    </body>
+</html>
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DueDate)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DueDate)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
